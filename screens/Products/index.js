@@ -84,7 +84,7 @@ const ListScreen = ({
   return <SafeAreaView style={styles.container}>
       <TextInput style={styles.inputStyle} value={search} placeholder="Search by title..." onChangeText={text => searchFilter(text)} />
       <Button title="Sort by price" onPress={sortData} />
-      {error && <Text>No items found</Text>}
+      {error && <Text style={styles.errorStyle}>No items found</Text>}
       <FlatList data={filteredData} renderItem={renderItem} keyExtractor={item => item.id.toString()} />
     </SafeAreaView>;
 };
@@ -138,5 +138,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 20,
     margin: 10
+  },
+  errorStyle: {
+    color: "red",
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 20
   }
 });
