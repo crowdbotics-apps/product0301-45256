@@ -7,8 +7,9 @@ const ListScreen = ({
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [search, setSearch] = useState("");
+  const [error, setError] = useState(false);
   useEffect(() => {
-    const fetchData = {
+    const fetchData = [{
       id: 1,
       title: "iPhone 9",
       description: "An apple mobile which is nothing like apple",
@@ -20,9 +21,21 @@ const ListScreen = ({
       category: "smartphones",
       thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
       images: ["https://i.dummyjson.com/data/products/1/1.jpg", "https://i.dummyjson.com/data/products/1/2.jpg", "https://i.dummyjson.com/data/products/1/3.jpg", "https://i.dummyjson.com/data/products/1/4.jpg", "https://i.dummyjson.com/data/products/1/thumbnail.jpg"]
-    };
-    setData([fetchData]);
-    setFilteredData([fetchData]);
+    }, {
+      id: 2,
+      title: "iPhone X",
+      description: "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+      price: 899,
+      discountPercentage: 17.94,
+      rating: 4.44,
+      stock: 34,
+      brand: "Apple",
+      category: "smartphones",
+      thumbnail: "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
+      images: ["https://i.dummyjson.com/data/products/2/1.jpg", "https://i.dummyjson.com/data/products/2/2.jpg", "https://i.dummyjson.com/data/products/2/3.jpg", "https://i.dummyjson.com/data/products/2/thumbnail.jpg"]
+    }];
+    setData(fetchData);
+    setFilteredData(fetchData);
   }, []);
 
   const searchFilter = text => {
@@ -32,11 +45,18 @@ const ListScreen = ({
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
-      setFilteredData(newData);
-      setSearch(text);
+
+      if (newData.length) {
+        setFilteredData(newData);
+        setSearch(text);
+        setError(false);
+      } else {
+        setError(true);
+      }
     } else {
       setFilteredData(data);
       setSearch(text);
+      setError(false);
     }
   };
 
@@ -63,6 +83,7 @@ const ListScreen = ({
   return <SafeAreaView style={styles.container}>
       <TextInput style={styles.inputStyle} value={search} placeholder="Search by title..." onChangeText={text => searchFilter(text)} />
       <Button title="Sort by price" onPress={sortData} />
+      {error && <Text>No items found</Text>}
       <FlatList data={filteredData} renderItem={renderItem} keyExtractor={item => item.id.toString()} />
     </SafeAreaView>;
 };
