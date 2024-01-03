@@ -51,6 +51,7 @@ const ListScreen = ({
         setSearch(text);
         setError(false);
       } else {
+        setFilteredData(newData);
         setError(true);
       }
     } else {
