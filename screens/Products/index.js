@@ -416,7 +416,6 @@ const ListScreen = ({
           {item.description.substring(0, 37) + "..."}
         </Text>
         <Text style={styles.priceStyle}>${item.price} </Text>
-        
       </View>
     </TouchableOpacity>;
 

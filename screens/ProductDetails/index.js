@@ -6,20 +6,36 @@ const ProductDetails = ({
   navigation
 }) => {
   const [product, setProduct] = useState(null);
+  const {
+    id
+  } = route.params;
   useEffect(() => {
-    const {
-      id
-    } = route.params;
-    fetch('https://my-json-server.typicode.com/demo/products').then(response => response.json()).then(data => {
-      const selectedProduct = data.find(item => item.id === id);
-      setProduct(selectedProduct);
-    });
+    const products = {
+      products: [{
+        id: 1,
+        title: "Sleeve Shirt Womens",
+        description: "Cotton Solid Color Professional Wear Sleeve Shirt Womens Work Blouses Wholesale Clothing Casual Plain Custom Top OEM Customized",
+        price: 90,
+        discountPercentage: 10.89,
+        rating: 4.26,
+        stock: 39,
+        brand: "Professional Wear",
+        category: "tops",
+        thumbnail: "https://i.dummyjson.com/data/products/36/thumbnail.jpg",
+        images: ["https://i.dummyjson.com/data/products/36/1.jpg", "https://i.dummyjson.com/data/products/36/2.webp", "https://i.dummyjson.com/data/products/36/3.webp", "https://i.dummyjson.com/data/products/36/4.jpg", "https://i.dummyjson.com/data/products/36/thumbnail.jpg"]
+      }],
+      total: 5,
+      skip: 0,
+      limit: 5
+    };
+    const filteredProducts = products.products.filter(item => item.id === id);
+    setData(filteredProducts);
   }, []);
 
   const addToCart = () => {
     // Add to cart functionality here
     // Then navigate to cart screen
-    navigation.navigate('Cart');
+    navigation.navigate("Cart");
   };
 
   if (!product) {
@@ -36,17 +52,17 @@ const ProductDetails = ({
         <Text style={styles.price}>${product.price}</Text>
         <Text style={styles.stock}>In Stock: {product.stock}</Text>
         <Text style={styles.rating}>Rating: {product.rating}</Text>
-        <Button title="Add to Cart" onPress={addToCart} style={styles.button} />
+        <Button title="Add to Cart" onPress={addToCart} />
       </ScrollView>
     </SafeAreaView>;
 };
 
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#f0f0f1"
   },
   contentContainer: {
-    backgroundColor: "#f0f0f1",
     padding: 10,
     alignItems: "center"
   },
@@ -79,7 +95,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 20,
-    backgroundColor: '#007BFF',
+    backgroundColor: "#007BFF",
     padding: 10,
     borderRadius: 5
   }
