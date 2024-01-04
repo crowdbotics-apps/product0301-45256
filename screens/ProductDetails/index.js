@@ -1,35 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, ScrollView, SafeAreaView, Text, Image, Button } from "react-native";
 
-const ProductDetails = () => {
-  const product = {
-    id: 1,
-    title: "iPhone 9",
-    description: "An apple mobile which is nothing like apple",
-    price: 549,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    stock: 94,
-    brand: "Apple",
-    category: "smartphones",
-    thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-    images: ["https://i.dummyjson.com/data/products/1/1.jpg", "https://i.dummyjson.com/data/products/1/2.jpg", "https://i.dummyjson.com/data/products/1/3.jpg", "https://i.dummyjson.com/data/products/1/4.jpg", "https://i.dummyjson.com/data/products/1/thumbnail.jpg"]
+const ProductDetails = ({
+  route,
+  navigation
+}) => {
+  const [product, setProduct] = useState(null);
+  useEffect(() => {
+    const {
+      id
+    } = route.params;
+    fetch('https://my-json-server.typicode.com/demo/products').then(response => response.json()).then(data => {
+      const selectedProduct = data.find(item => item.id === id);
+      setProduct(selectedProduct);
+    });
+  }, []);
+
+  const addToCart = () => {
+    // Add to cart functionality here
+    // Then navigate to cart screen
+    navigation.navigate('Cart');
   };
 
-  const addToCart = () => {// Add to cart functionality here
-  };
+  if (!product) {
+    return null;
+  }
 
   return <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <Text style={styles.title}>{product.title}</Text>
         <Image style={styles.image} source={{
-        uri: product.images[2]
+        uri: product.images[0]
       }} />
         <Text style={styles.description}>{product.description}</Text>
         <Text style={styles.price}>${product.price}</Text>
         <Text style={styles.stock}>In Stock: {product.stock}</Text>
         <Text style={styles.rating}>Rating: {product.rating}</Text>
-        <Button title="Add to Cart" onPress={addToCart} style={styles.HhXKgjWc} />
+        <Button title="Add to Cart" onPress={addToCart} style={styles.button} />
       </ScrollView>
     </SafeAreaView>;
 };
@@ -70,10 +77,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 10
   },
-  HhXKgjWc: {
-    position: "absolute",
-    top: 1052,
-    left: 120
+  button: {
+    marginTop: 20,
+    backgroundColor: '#007BFF',
+    padding: 10,
+    borderRadius: 5
   }
 });
 export default ProductDetails;
