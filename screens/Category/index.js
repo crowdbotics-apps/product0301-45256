@@ -100,13 +100,7 @@ const Category = ({
       limit: 5
     };
     const filteredProducts = products.products.filter(item => item.category === category);
-
-    if (filteredProducts.length) {
-      setData(filteredProducts);
-      setError(false);
-    } else {
-      setError(true);
-    }
+    setData(filteredProducts);
   }, []);
   return <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
