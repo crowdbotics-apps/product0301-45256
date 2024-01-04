@@ -23,6 +23,18 @@ const Category = ({
         thumbnail: "https://i.dummyjson.com/data/products/36/thumbnail.jpg",
         images: ["https://i.dummyjson.com/data/products/36/1.jpg", "https://i.dummyjson.com/data/products/36/2.webp", "https://i.dummyjson.com/data/products/36/3.webp", "https://i.dummyjson.com/data/products/36/4.jpg", "https://i.dummyjson.com/data/products/36/thumbnail.jpg"]
       }, {
+        id: 39,
+        title: "Women Sweaters Wool",
+        description: "2021 Custom Winter Fall Zebra Knit Crop Top Women Sweaters Wool Mohair Cos Customize Crew Neck Women' S Crop Top Sweater",
+        price: 600,
+        discountPercentage: 17.2,
+        rating: 4.55,
+        stock: 55,
+        brand: "Top Sweater",
+        category: "tops",
+        thumbnail: "https://i.dummyjson.com/data/products/39/thumbnail.jpg",
+        images: ["https://i.dummyjson.com/data/products/39/1.jpg", "https://i.dummyjson.com/data/products/39/2.jpg", "https://i.dummyjson.com/data/products/39/3.jpg", "https://i.dummyjson.com/data/products/39/4.jpg", "https://i.dummyjson.com/data/products/39/thumbnail.jpg"]
+      }, {
         id: 6,
         title: "MacBook Pro",
         description: "MacBook Pro 2021 with mini-LED display may launch between September, November",
@@ -31,7 +43,7 @@ const Category = ({
         rating: 4.57,
         stock: 83,
         brand: "Apple",
-        category: "tops",
+        category: "laptops",
         thumbnail: "https://i.dummyjson.com/data/products/6/thumbnail.png",
         images: ["https://i.dummyjson.com/data/products/6/1.png", "https://i.dummyjson.com/data/products/6/2.jpg", "https://i.dummyjson.com/data/products/6/3.png", "https://i.dummyjson.com/data/products/6/4.jpg"]
       }, {
@@ -88,7 +100,13 @@ const Category = ({
       limit: 5
     };
     const filteredProducts = products.products.filter(item => item.category === category);
-    setData(filteredProducts);
+
+    if (filteredProducts.length) {
+      setData(filteredProducts);
+      setError(false);
+    } else {
+      setError(true);
+    }
   }, []);
   return <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -138,6 +156,12 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     marginTop: 5
+  },
+  errorStyle: {
+    color: "red",
+    fontSize: 20,
+    textAlign: "center",
+    marginTop: 30
   }
 });
 export default Category;
