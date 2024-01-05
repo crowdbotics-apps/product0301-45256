@@ -1,66 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, ScrollView, Text, Image, Button, StyleSheet } from 'react-native';
+import React from "react";
+import { StyleSheet, ScrollView, SafeAreaView, Text, Image, Button } from "react-native";
 
-const ProductDetails = ({
-  route,
-  navigation
-}) => {
-  const [product, setProduct] = useState(null);
-  const products = [{
-    "id": 1,
-    "title": "iPhone 9",
-    "description": "An apple mobile which is nothing like apple",
-    "price": 549,
-    "discountPercentage": 12.96,
-    "rating": 4.69,
-    "stock": 94,
-    "brand": "Apple",
-    "category": "smartphones",
-    "thumbnail": "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
-    "images": ["https://i.dummyjson.com/data/products/1/1.jpg", "https://i.dummyjson.com/data/products/1/2.jpg", "https://i.dummyjson.com/data/products/1/3.jpg", "https://i.dummyjson.com/data/products/1/4.jpg", "https://i.dummyjson.com/data/products/1/thumbnail.jpg"]
-  }, {
-    "id": 2,
-    "title": "iPhone X",
-    "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-    "price": 899,
-    "discountPercentage": 17.94,
-    "rating": 4.44,
-    "stock": 34,
-    "brand": "Apple",
-    "category": "smartphones",
-    "thumbnail": "https://i.dummyjson.com/data/products/2/thumbnail.jpg",
-    "images": ["https://i.dummyjson.com/data/products/2/1.jpg", "https://i.dummyjson.com/data/products/2/2.jpg", "https://i.dummyjson.com/data/products/2/3.jpg", "https://i.dummyjson.com/data/products/2/thumbnail.jpg"]
-  }];
-  useEffect(() => {
-    const {
-      productId
-    } = route.params;
-    const selectedProduct = products.find(product => product.id === productId);
-    setProduct(selectedProduct);
-  }, []);
-
-  const addToCart = () => {
-    // Add to cart functionality here
-    navigation.navigate('AddToCart', {
-      product
-    });
+const ProductDetails = () => {
+  const product = {
+    id: 1,
+    title: "iPhone 9",
+    description: "An apple mobile which is nothing like apple",
+    price: 549,
+    discountPercentage: 12.96,
+    rating: 4.69,
+    stock: 94,
+    brand: "Apple",
+    category: "smartphones",
+    thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg",
+    images: ["https://i.dummyjson.com/data/products/1/1.jpg", "https://i.dummyjson.com/data/products/1/2.jpg", "https://i.dummyjson.com/data/products/1/3.jpg", "https://i.dummyjson.com/data/products/1/4.jpg", "https://i.dummyjson.com/data/products/1/thumbnail.jpg"]
   };
 
-  if (!product) {
-    return null;
-  }
+  const addToCart = () => {// Add to cart functionality here
+  };
 
   return <SafeAreaView style={styles.safeArea}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <Text style={styles.title}>{product.title}</Text>
         <Image style={styles.image} source={{
-        uri: product.images[0]
+        uri: product.images[2]
       }} />
         <Text style={styles.description}>{product.description}</Text>
         <Text style={styles.price}>${product.price}</Text>
         <Text style={styles.stock}>In Stock: {product.stock}</Text>
         <Text style={styles.rating}>Rating: {product.rating}</Text>
-        <Button title="Add to Cart" onPress={addToCart} />
+        <Button title="Add to Cart" onPress={addToCart} style={styles.HhXKgjWc} />
       </ScrollView>
     </SafeAreaView>;
 };
@@ -100,6 +69,11 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 16,
     marginBottom: 10
+  },
+  HhXKgjWc: {
+    position: "absolute",
+    top: 1052,
+    left: 120
   }
 });
 export default ProductDetails;
