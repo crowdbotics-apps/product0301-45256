@@ -388,6 +388,7 @@ const ListScreen = ({
         setError(false);
       } else {
         setFilteredData(newData);
+        setSearch(text);
         setError(true);
       }
     } else {
