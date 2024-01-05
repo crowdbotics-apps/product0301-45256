@@ -9,7 +9,7 @@ const Login = () => {
 
   const handleLogin = () => {
     if (username && password) {
-      if (username === "Rahul" && password === "1234") navigation.navigate("Categories");
+      if (username === "Rahul" && password === "1234" || username === "Rashmi" && password === "1234") navigation.navigate("Categories");
     } else {
       Alert.alert("Error", "Please enter username and password");
     }
