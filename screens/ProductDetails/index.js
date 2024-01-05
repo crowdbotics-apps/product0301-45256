@@ -16,8 +16,7 @@ const ProductDetails = () => {
     images: ["https://i.dummyjson.com/data/products/1/1.jpg", "https://i.dummyjson.com/data/products/1/2.jpg", "https://i.dummyjson.com/data/products/1/3.jpg", "https://i.dummyjson.com/data/products/1/4.jpg", "https://i.dummyjson.com/data/products/1/thumbnail.jpg"]
   };
 
-  const addToCart = () => {
-    navigation.navigate("AddToCart");
+  const addToCart = () => {//Add code here 
   };
 
   return <SafeAreaView style={styles.safeArea}>
